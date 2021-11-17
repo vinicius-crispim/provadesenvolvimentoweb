@@ -9,7 +9,7 @@ type TodosCarros = {
     quantia: number[]
 }
 let carrostorage = JSON.parse(localStorage.getItem('carro') || '{}');
-const EstoqueTable = () => {
+const VerificaAtivos = () => {
 
     const navegador = useNavigate();
     const [carros, setCarros] = useState<TodosCarros>(carrostorage)
@@ -24,11 +24,9 @@ const EstoqueTable = () => {
             console.log("FOI");
             console.log(data);
             setcarro(data);
-            localStorage.removeItem("carrostorage");
-            localStorage.setItem('carrostorage', JSON.stringify(data));
-            let carrostorage = JSON.parse(localStorage.getItem('carrostorage') || '{}');
-            console.log(carrostorage)
-            navegador("/verificacarro")
+            localStorage.removeItem("carro");
+            localStorage.setItem('carro', JSON.stringify(data));
+            navegador("/visualizaproduto")
             window.location.reload();
         })
     }
@@ -59,16 +57,15 @@ const EstoqueTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {carros.quantia.map(x => (
-                            <tr key={carros.todoscarros[x].id}>
-                                <td className="text-center">{carros.todoscarros[x].nome}</td>
-                                <td className="text-center">{carros.todoscarros[x].marca.nome}</td>
-                                <td className="text-center">{carros.todoscarros[x].preço}</td>
-                                <td className="text-center">{carros.todoscarros[x].status}</td>
-                                <td className="text-center"><button type="submit" value={carros.todoscarros[x].id} onClick={onSubmit} className="btn btn-outline-success btn-lg align-bottom"> Editar</button></td>
-                            </tr>
-                        ))}
-                    </tbody>
+                    {carros.quantia.map(x => (
+                        <tr key={carros.todoscarros[x].id}>
+                            <td className="text-center">{carros.todoscarros[x].nome}</td>
+                            <td className="text-center">{carros.todoscarros[x].marca.nome}</td>
+                            <td className="text-center">{carros.todoscarros[x].preço}</td>
+                            <td className="text-center">{carros.todoscarros[x].status}</td>
+                        </tr>
+                    ))}
+                </tbody>
                 </table>
             </div>
             <li className="d-flex justify-content-between lh-sm py-3 text-center">
@@ -94,4 +91,4 @@ const EstoqueTable = () => {
     );
 }
 
-export default EstoqueTable;
+export default VerificaAtivos;

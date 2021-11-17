@@ -1,4 +1,5 @@
 package com.web.prova.services;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,30 +10,30 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.web.prova.entities.Categoria;
-import com.web.prova.repositories.CategoriaRepository;
+import com.web.prova.entities.Marca;
+import com.web.prova.repositories.MarcaRepository;
 import com.web.prova.services.exceptions.DatabaseException;
 import com.web.prova.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class CategoriaService {
+public class MarcaService {
 	@Autowired
-	private CategoriaRepository repository;
+	private MarcaRepository repository;
 
-	public List<Categoria> findAll() {
+	public List<Marca> findAll() {
 		return repository.findAll();
 	}
 
-	public Categoria findById(Long id) {
-		Optional<Categoria> op = repository.findById(id);
+	public Marca findById(Long id) {
+		Optional<Marca> op = repository.findById(id);
 		return op.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 
-	public Categoria saveCategoria(Categoria categoria) {
+	public Marca saveMarca(Marca categoria) {
 		return repository.save(categoria);
 	}
 
-	public void deleteCategoria(Long id) {
+	public void deleteMarca(Long id) {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
@@ -44,17 +45,17 @@ public class CategoriaService {
 
 	// getOne apenas pega o objeto monitorado e depois mexe no banco, o findBy pega
 	// no banco
-	public Categoria updateCategoria(Long id, Categoria categoria) {
+	public Marca updateMarca(Long id, Marca categoria) {
 		try {
-			Categoria obj = repository.getOne(id);
+			Marca obj = repository.getOne(id);
 			updateData(obj, categoria);
 			return repository.save(obj);
-		}catch(EntityNotFoundException e) {
+		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
 	}
 
-	private void updateData(Categoria obj, Categoria categoria) {
+	private void updateData(Marca obj, Marca categoria) {
 
 		obj.setNome(categoria.getNome());
 	}

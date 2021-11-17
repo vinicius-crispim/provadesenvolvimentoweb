@@ -15,53 +15,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.web.prova.entities.Categoria;
-import com.web.prova.facade.ProdutoFacade;
+import com.web.prova.entities.Marca;
+import com.web.prova.facade.CarroFacade;
 
 @RestController
-@RequestMapping(value = "/categorias")
-public class CategoriaResource {
+@RequestMapping(value = "/marcas")
+public class MarcaResource {
     @Autowired 
-    private ProdutoFacade produtofacade;
+    private CarroFacade carrofacade;
 
 	@GetMapping
-	public ResponseEntity<List<Categoria>> findAll(){
+	public ResponseEntity<List<Marca>> findAll(){
 
-		List<Categoria> list = produtofacade.findAllCategoria();
+		List<Marca> list = carrofacade.findAllMarca();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")
-	public ResponseEntity<Categoria> findById(@PathVariable Long id){
-		Categoria u = produtofacade.findCategoriaById(id);
+	public ResponseEntity<Marca> findById(@PathVariable Long id){
+		Marca u = carrofacade.findMarcaById(id);
 		return ResponseEntity.ok().body(u);
 	}
 	
 	//Post para inserir no banco
 	//RequestBody para informar que o objeto vai chegar no modo Json
 	@PostMapping
-	public ResponseEntity<Categoria> saveCategoria(@RequestBody Categoria categoria){
-		categoria = produtofacade.saveCategoria(categoria);
+	public ResponseEntity<Marca> saveMarca(@RequestBody Marca marca){
+		marca = carrofacade.saveMarca(marca);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}")
-				.buildAndExpand(categoria.getId())
+				.buildAndExpand(marca.getId())
 				.toUri();
 		
-		return ResponseEntity.created(uri).body(categoria);
+		return ResponseEntity.created(uri).body(marca);
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deleteCategoria(@PathVariable Long id){
-		produtofacade.deleteCategoria(id);		
+	public ResponseEntity<Void> deleteMarca(@PathVariable Long id){
+		carrofacade.deleteMarca(id);		
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Categoria> updateCategoria(@PathVariable Long id, @RequestBody Categoria categoria){
-		categoria = produtofacade.updateCategoria(id, categoria);
-		return ResponseEntity.ok().body(categoria);
+	public ResponseEntity<Marca> updateMarca(@PathVariable Long id, @RequestBody Marca marca){
+		marca = carrofacade.updateMarca(id, marca);
+		return ResponseEntity.ok().body(marca);
 	}
 	
 

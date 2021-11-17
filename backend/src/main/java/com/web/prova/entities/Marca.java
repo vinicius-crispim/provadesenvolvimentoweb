@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_categoria")
-public class Categoria implements Serializable {
+@Table(name = "tb_marca")
+public class Marca implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,13 +24,13 @@ public class Categoria implements Serializable {
 
 	private String nome;
 
-	@OneToMany(mappedBy = "categoria")
-	private List<Produto> produtos = new ArrayList<Produto>();
+	@OneToMany(mappedBy = "marca")
+	private List<Carro> carros = new ArrayList<Carro>();
 
-	public Categoria() {
+	public Marca() {
 	}
 
-	public Categoria(Long id, String nome) {
+	public Marca(Long id, String nome) {
 		this.id = id;
 		this.nome = nome;
 	}
@@ -51,8 +51,8 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 	@JsonIgnore
-	public List<Produto> getProdutos() {
-		return produtos;
+	public List<Carro> getProdutos() {
+		return carros;
 	}
 
 }

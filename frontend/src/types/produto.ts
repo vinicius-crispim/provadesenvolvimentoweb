@@ -1,27 +1,12 @@
-export type Produto = {
+export type Carro = {
     id: number;
     nome: string,
-    descrição: string,
-    quantidademin: number,
-    estoque: number,
-    categoria: Categoria,
-
+    preço:number;
+    marca:Marca;
+    status:string;
 }
 
-export type Categoria = {
+export type Marca = {
     id: number,
     nome: string,
-}
-
-export type ProdutoPage ={
-    content?:Produto[];
-    last: boolean;
-    totalElements: number;
-    totalPages: number;
-    first: boolean;
-    numberOfElements?: number;
-    size?: number;
-    number: number;
-    empty?: boolean;
-    status?:String;
 }
