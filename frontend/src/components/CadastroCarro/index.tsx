@@ -17,8 +17,8 @@ const CadastroCarro = () => {
     const [values, setValues] = useState<Carro>({
         id: 0,
         nome: "",
-        preço:0,
-        status:"",
+        preço: 0,
+        status: "",
         marca: {
             id: 0,
             nome: "",
@@ -42,12 +42,33 @@ const CadastroCarro = () => {
 
     function onSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
-        values.status="Ativo"
-        axios.post(`${BASE_URL}/carros`, values)
-            .then((response) => {
-                alert("carro cadastrado com sucesso")
-                navegador("/")
-            });
+        values.status = "Ativo"
+        /*if (values.nome !== "" && values.preço !== 0 && values.marca.id !== 0) {
+            axios.post(`${BASE_URL}/carros`, values)
+                .then((response) => {
+                    alert("carro cadastrado com sucesso")
+                    navegador("/")
+                });
+        }else {
+            alert("NAOO")
+        }*/
+        if(values.nome === ""){
+            alert("O CAMPO NOME É OBRIGATÓRIO, INSIRA-O PARA PODER SALVAR")
+        }
+        else if(values.preço === 0){
+            alert("O CAMPO PREÇO É OBRIGATÓRIO, INSIRA-O PARA PODER SALVAR")
+        }else if(values.marca.id === 0){
+            alert("É OBRIGATÓRIO INFORMAR A MARCA DO CARRO")
+        }else{
+            axios.post(`${BASE_URL}/carros`, values)
+                .then((response) => {
+                    alert("CARRO CADASTRADO COM SUCESSO")
+
+                    navegador("/")
+                    window.location.reload()
+                });
+        }
+
     }
 
 
@@ -92,14 +113,14 @@ const CadastroCarro = () => {
                     <div className="row py-1">
                         <div className="col">
                             <div className="promotion-form__group">
-                                <label htmlFor="nome">Nome:</label>
-                                <input className="form-control" type="text" id="nome" name="nome" onChange={onChange} required />
+                                <label htmlFor="nome">* Nome:</label>
+                                <input className="form-control" type="text" id="nome" name="nome" onChange={onChange} />
                             </div>
                         </div>
 
                         <div className="col">
                             <div className="promotion-form__group">
-                                <label htmlFor="Marca" >Marca:</label>
+                                <label htmlFor="Marca" >* Marca:</label>
                                 <select name="Marca" className="form-select" aria-label="Default select example" onChange={acha}>
                                     <option>Selecione</option>
                                     {todasCategorias.ids.map(x => (
@@ -112,8 +133,8 @@ const CadastroCarro = () => {
                     <div className="row py-3">
                         <div className="col">
                             <div className="promotion-form__group">
-                                <label htmlFor="preço">Preço:</label>
-                                <input className="form-control" type="number" id="preço" name="preço" onChange={onChange} required />
+                                <label htmlFor="preço">* Preço:</label>
+                                <input className="form-control" type="number" id="preço" name="preço" onChange={onChange} />
                             </div>
                         </div>
                     </div>

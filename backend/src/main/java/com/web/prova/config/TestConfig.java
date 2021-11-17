@@ -21,7 +21,7 @@ public class TestConfig implements CommandLineRunner {
 		Marca m1 = new Marca();
 		m1.setNome("Hyundai");
 		Marca m2 = new Marca();
-		m2.setNome("Ford");
+		m2.setNome("Fiat");
 		Marca m3 = new Marca();
 		m3.setNome("Chevrolet");
 		carrofacade.saveMarca(m1);
@@ -38,6 +38,16 @@ public class TestConfig implements CommandLineRunner {
 		c2.setNome("Hyundai HB20");
 		c2.setPreço(75000.0);
 		c2.setStatus("Ativo");
+		Carro c10 = new Carro();
+		c10.setMarca(m2);
+		c10.setNome("Fiat Argo");
+		c10.setPreço(50500.0);
+		c10.setStatus("Inativo");
+		Carro c20 = new Carro();
+		c20.setMarca(m2);
+		c20.setNome("Fiat Dobló");
+		c20.setPreço(75000.0);
+		c20.setStatus("Ativo");
 		Carro c3 = new Carro();
 		c3.setMarca(m3);
 		c3.setNome("Chevette");
@@ -46,6 +56,7 @@ public class TestConfig implements CommandLineRunner {
 		carrofacade.saveCarro(c1);
 		carrofacade.saveCarro(c2);
 		carrofacade.saveCarro(c3);
-
+		carrofacade.saveCarro(c20);
+		carrofacade.saveCarro(c10);
 	}
 }

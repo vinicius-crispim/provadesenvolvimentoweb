@@ -8,11 +8,11 @@ const NavBar = () => {
     return (
         <div className="container py-3">
             <header>
-                <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+                <div className="text-center pb-3 mb-4 border-bottom">
 
 
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <a className="me-3 py-2 text-dark text-decoration-none" href="/">Home</a>
+                        <a className="me-3 py-2 text-dark text-decoration-none" href="/">Voltar para home</a>
                     </nav>
                 </div>
 
